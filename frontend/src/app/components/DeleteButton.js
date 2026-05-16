@@ -7,19 +7,24 @@ export default function DeleteButton({ id }) {
   const router = useRouter();
 
   const handleDelete = async () => {
-    
     const confirmed = confirm("Are you sure you want to delete this?");
     if (!confirmed) return;
 
+    
+    const token = localStorage.getItem("access_token");
+
     const response = await fetch(`http://127.0.0.1:8000/api/media/${id}/`, {
       method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
     });
 
     if (response.ok) {
       toast.success("Item successfully deleted!"); 
       router.refresh();
     } else {
-      toast.error("Failed to delete the item."); 
+      toast.error("Failed to delete the item. Are you logged in?"); 
     }
   };
 

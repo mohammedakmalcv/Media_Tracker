@@ -1,57 +1,69 @@
-📺 MediaTracker: Full-Stack Headless Application
+# 📺 MediaTracker: Full-Stack Headless Application
+
 A modern, high-performance web application designed to track and manage personal media consumption across Manga, Manhwa, and Video Games. This project demonstrates a complete Decoupled (Headless) Architecture, separating a robust Python backend from a dynamic React-based frontend.
 
-🏗️ Architecture Overview
+# 🏗️ Architecture Overview
+
 Unlike traditional monolithic applications, MediaTracker utilizes a decoupled architecture:
 
-Backend: A RESTful API built with Django REST Framework (DRF). It handles data persistence, validation, and business logic.
+* **Backend:** A RESTful API built with Django REST Framework (DRF). It handles data persistence, validation, and business logic.
 
-Frontend: A modern, server-side rendered (SSR) interface built with Next.js 15+ and React.
+* **Frontend:** A modern, server-side rendered (SSR) interface built with Next.js 15+ and React.
 
-Communication: Systems communicate via asynchronous JSON exchanges, allowing for independent scaling and maintenance of each layer.
+* **Communication:** Systems communicate via asynchronous JSON exchanges, allowing for independent scaling and maintenance of each layer.
 
-🛠️ Tech Stack
-Backend
-Language: Python
+# 🛠️ Tech Stack
 
-Framework: Django REST Framework
+* **Backend Language:** Python
 
-Database: PostgreSQL (Production) / SQLite (Development)
+* **Framework:** Django REST Framework
 
-Frontend
-Framework: Next.js (App Router)
+* **Database:** PostgreSQL (Production) / SQLite (Development)
 
-Styling: Tailwind CSS (Modern Utility-First Styling)
+* **Frontend Framework:** Next.js (App Router)
 
-State Management: React Hooks (useState, useEffect)
+* **Styling:** Tailwind CSS (Modern Utility-First Styling)
 
-UX Enhancements: React Hot Toast (Notifications), Next.js Loading Skeletons
+* **State Management:** React Hooks (useState, useEffect)
 
-🚀 Key Features
-Full CRUD Operations: Seamlessly Create, Read, Update, and Delete media entries across the decoupled stack.
+* **UX Enhancements:** React Hot Toast (Notifications), Next.js Loading Skeletons
 
-Real-time Search: Instant, client-side filtering of media titles for a smooth user experience.
+# 🚀 Key Features
 
-Dynamic Routing: Utilizes Next.js dynamic segments ([id]) for efficient resource editing.
+* **Full CRUD Operations:** Seamlessly Create, Read, Update, and Delete media entries across the decoupled stack.
 
-Optimized UX: * Loading Skeletons: Animated pulsing states to prevent layout shift during data fetching.
+* **Real-time Search:** Instant, client-side filtering of media titles for a smooth user experience.
 
-Toast Notifications: Non-blocking visual feedback for database interactions.
+* **Dynamic Routing:** Utilizes Next.js dynamic segments ([id]) for efficient resource editing.
 
-Responsive Design: Fully mobile-responsive interface using Tailwind’s grid system.
+* **Optimized UX:**  * Loading Skeletons: Animated pulsing states to prevent layout shift during data fetching.
 
-💻 Local Setup
-1. Backend Setup (Django)
-Bash
-cd media_tracker
-python -m venv nenv
-source nenv/bin/activate  # Or .\nenv\Scripts\activate on Windows
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-2. Frontend Setup (Next.js)
-Bash
-cd frontend
-npm install
-npm run dev
-The application will be live at http://localhost:3000.
+* **Toast Notifications:** Non-blocking visual feedback for database interactions.
+
+* **Responsive Design:** Fully mobile-responsive interface using Tailwind’s grid system.
+
+## 💻 Local Setup
+
+### A. Backend Setup (Django)
+
+* cd media_tracker
+
+* python -m venv nenv
+
+* source nenv/bin/activate  # Or .\nenv\Scripts\activate on Windows
+
+* pip install -r requirements.txt
+
+* python manage.py migrate
+
+* python manage.py runserver
+
+### B. Frontend Setup (Next.js)
+
+* cd frontend
+
+* npm install
+
+* npm run dev
+
+* The application will be live at http://localhost:3000.
