@@ -37,7 +37,7 @@ export default function AddMedia() {
       if (formData.category === "Game") {
         
         const apiKey = "f1dd93c66ae942b98cac8efb2cef73b7"; 
-        const response = await fetch(`https://media-tracker-api-os56.onrender.com/api/media/`);
+        const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${formData.title}`);
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
