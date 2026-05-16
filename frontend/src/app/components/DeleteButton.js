@@ -13,7 +13,7 @@ export default function DeleteButton({ id }) {
     
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`/api/media/${id}/`, {
+    const response = await fetch(`https://media-tracker-api-os56.onrender.com/api/media/${id}/`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}` 

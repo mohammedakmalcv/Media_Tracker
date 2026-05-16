@@ -21,7 +21,8 @@ export default function EditMedia() {
     if (!id) return;
     
     const fetchItem = async () => {
-      const response = await fetch(`https://media-tracker-api-os56.onrender.com`);
+      const response = await fetch(`https://media-tracker-api-os56.onrender.com/api/token/`);
+        method: "POST"
       if (response.ok) {
         const data = await response.json();
         

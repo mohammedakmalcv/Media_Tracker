@@ -21,7 +21,7 @@ export default function Home() {
       }
 
       try {
-        const response = await fetch('/api/media/', {
+        const response = await fetch('https://media-tracker-api-os56.onrender.com/api/media/', {
           headers: {
             "Authorization": `Bearer ${token}`
           }
