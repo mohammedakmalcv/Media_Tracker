@@ -21,7 +21,7 @@ export default function EditMedia() {
     if (!id) return;
     
     const fetchItem = async () => {
-      const response = await fetch(`http://127.0.0.1:8000/api/media/${id}/`);
+      const response = await fetch(`https://media-tracker-api-os56.onrender.com`);
       if (response.ok) {
         const data = await response.json();
         
@@ -40,7 +40,7 @@ export default function EditMedia() {
     e.preventDefault();
 
     
-    const response = await fetch(`http://127.0.0.1:8000/api/media/${id}/`, {
+    const response = await fetch(`/api/media/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
