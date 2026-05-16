@@ -1,73 +1,72 @@
-"use client"; 
+"use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useState, useEffect } from "react";
+import MediaList from "./components/MediaList";
+import Link from "next/link";
 
-export default function Login() {
-  const router = useRouter();
-  
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
+export default function Home() {
+  const [mediaItems, setMediaItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleChange = (e) => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    const fetchMedia = async () => {
+      
+      const token = localStorage.getItem("access_token");
+      
+      
+      if (token) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); 
-
-    const response = await fetch("https://media-tracker-api-os56.onrender.com/api/token/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials), 
-    });
-
-    if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("access_token", data.access);
-        localStorage.setItem("refresh_token", data.refresh);
+      try {
         
-        toast.success("Successfully logged in!"); 
-        router.push("/");
-    } 
-    else {
-      toast.error("Invalid username or password!"); 
-    }
-  };
+        const headers = {};
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+
+        const response = await fetch('https://media-tracker-api-os56.onrender.com/api/media/', {
+          headers: headers
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setMediaItems(data);
+        } else {
+          console.error("API Error - Status:", response.status);
+        }
+      } catch (error) {
+        console.error("Failed to fetch media:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchMedia();
+  }, []);
+
+  if (isLoading) {
+    return <div className="min-h-screen p-10 bg-gray-950 text-white flex justify-center items-center">Loading your tracker...</div>;
+  }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-10 bg-gray-950 text-white">
-      <div className="w-full max-w-md p-8 bg-gray-900 border border-gray-800 rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold mb-6 text-blue-400 text-center">Welcome Back</h1>
+    <main className="min-h-screen p-10 bg-gray-950 text-white">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-blue-400">My Media Tracker</h1>
         
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          
-          <input 
-            type="text" name="username" placeholder="Username" 
-            value={credentials.username} onChange={handleChange} required
-            className="p-3 bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-blue-500"
-          />
-
-          <input 
-            type="password" name="password" placeholder="Password" 
-            value={credentials.password} onChange={handleChange} required
-            className="p-3 bg-gray-800 rounded border border-gray-700 focus:outline-none focus:border-blue-500"
-          />
-
-          <button type="submit" className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded mt-4 transition-colors">
-            Log In
-          </button>
-
-        </form>
+        
+        {isLoggedIn && (
+          <Link href="/add" className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-lg font-bold shadow-lg transition-all">
+            + Add New
+          </Link>
+        )}
       </div>
+    
+     
+      <MediaList initialItems={mediaItems} isLoggedIn={isLoggedIn} />
     </main>
   );
 }

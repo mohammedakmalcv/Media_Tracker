@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const [mediaItems, setMediaItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -53,10 +54,13 @@ export default function Home() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-blue-400">My Media Tracker</h1>
         
-        <Link href="/add" className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-lg font-bold shadow-lg transition-all">
-          + Add New
-        </Link>
+      {isLoggedIn && (
+          <Link href="/add" className="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-lg font-bold shadow-lg transition-all">
+            + Add New
+          </Link>
+        )}
       </div>
+    
 
       <MediaList initialItems={mediaItems} />
     </main>
