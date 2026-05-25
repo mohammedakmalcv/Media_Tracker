@@ -22,7 +22,7 @@ export default function DeleteButton({ id }) {
 
     if (response.ok) {
       toast.success("Item successfully deleted!"); 
-      router.refresh();
+      window.location.reload(); 
     } else {
       toast.error("Failed to delete the item. Are you logged in?"); 
     }
